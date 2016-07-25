@@ -10,3 +10,5 @@ The application have 4 activities.
 
 The application save the data in one cloud service (Dropbox, OneDrive or GoogleDrive), choosen by the client.
 When the client manage a category or a spend, the file containing the data, will be updated.
+
+###Use the app
