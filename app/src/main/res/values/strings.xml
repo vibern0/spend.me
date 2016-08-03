@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">Spend.Me</string>
+    <string name="welcome_to_spend_me">Welcome to Spend.Me</string>
+    <string name="tv_title_choose">Choose an option</string>
+    <string name="bt_categories">Categories</string>
+    <string name="bt_spends">Spends</string>
+    <string name="bt_options">Options</string>
 </resources>
