@@ -12,5 +12,35 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Hello World!" />
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="@string/tv_title_choose"
+        android:id="@+id/tvChoose"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:textSize="30sp" />
+
+    <Button
+        android:layout_width="200sp"
+        android:layout_height="wrap_content"
+        android:text="@string/bt_spends"
+        android:id="@+id/bt_spends"
+        android:layout_below="@+id/tvChoose"
+        android:layout_centerHorizontal="true" />
+
+    <Button
+        android:layout_width="200sp"
+        android:layout_height="wrap_content"
+        android:text="@string/bt_categories"
+        android:id="@+id/bt_categories"
+        android:layout_below="@+id/bt_spends"
+        android:layout_centerHorizontal="true" />
+
+    <Button
+        android:layout_width="200sp"
+        android:layout_height="wrap_content"
+        android:text="@string/bt_options"
+        android:id="@+id/bt_options"
+        android:layout_below="@+id/bt_categories"
+        android:layout_centerHorizontal="true" />
+
 </RelativeLayout>
