@@ -25,7 +25,8 @@
         android:text="@string/bt_spends"
         android:id="@+id/bt_spends"
         android:layout_below="@+id/tvChoose"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true"
+        android:onClick="goSpends" />
 
     <Button
         android:layout_width="200sp"
@@ -33,7 +34,8 @@
         android:text="@string/bt_categories"
         android:id="@+id/bt_categories"
         android:layout_below="@+id/bt_spends"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true"
+        android:onClick="goCategories" />
 
     <Button
         android:layout_width="200sp"
@@ -41,6 +43,7 @@
         android:text="@string/bt_options"
         android:id="@+id/bt_options"
         android:layout_below="@+id/bt_categories"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true"
+        android:onClick="goOptions" />
 
 </RelativeLayout>

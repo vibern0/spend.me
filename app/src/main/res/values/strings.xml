@@ -5,4 +5,6 @@
     <string name="bt_categories">Categories</string>
     <string name="bt_spends">Spends</string>
     <string name="bt_options">Options</string>
+    <string name="add_symbol">+</string>
+    <string name="no_categories">There is no categories!</string>
 </resources>
