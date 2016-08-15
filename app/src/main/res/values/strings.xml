@@ -7,4 +7,11 @@
     <string name="bt_options">Options</string>
     <string name="add_symbol">+</string>
     <string name="no_categories">There is no categories!</string>
+    <string name="new_category">New Category</string>
+    <string name="cname">Name</string>
+    <string name="cchar">Category Character</string>
+    <string name="btcancel">Cancel</string>
+    <string name="btadd">Add</string>
+    <string name="new_spend">New Spend</string>
+    <string name="etvalue">Value</string>
 </resources>
