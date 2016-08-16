@@ -18,7 +18,8 @@
         <activity android:name=".SpendsActivity" />
         <activity android:name=".CategoriesActivity" />
         <activity android:name=".NewSpendActivity" />
-        <activity android:name=".NewCategoryActivity"></activity>
+        <activity android:name=".NewCategoryActivity" />
+        <activity android:name=".OptionsActivity" />
     </application>
 
 </manifest>
