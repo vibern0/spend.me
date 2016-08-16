@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.TextView;
 
 public class SpendsActivity extends AppCompatActivity {
 
@@ -16,10 +17,18 @@ public class SpendsActivity extends AppCompatActivity {
 
         String[] mobileArray = {"Android","IPhone","WindowsMobile","Blackberry","WebOS","Ubuntu","Windows7","Max OS X",
                 "Android","IPhone","WindowsMobile","Blackberry","WebOS","Ubuntu","Windows7","Max OS X"};
-        ArrayAdapter adapter = new ArrayAdapter<String>(this, R.layout.activity_listview_spends, mobileArray);
 
-        ListView listView = (ListView) findViewById(R.id.lv_spends);
-        listView.setAdapter(adapter);
+        ListView lv = (ListView) findViewById(R.id.lv_spends);
+        TextView tv = (TextView) findViewById(R.id.tv_no_spends);
+
+        if(mobileArray.length == 0) {
+            lv.setVisibility(View.GONE);
+            tv.setVisibility(View.VISIBLE);
+        }
+        else {
+            ArrayAdapter adapter = new ArrayAdapter<String>(this, R.layout.activity_listview_spends, mobileArray);
+            lv.setAdapter(adapter);
+        }
     }
 
     public void goNewSpend(View view) {
