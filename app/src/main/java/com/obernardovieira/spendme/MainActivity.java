@@ -37,5 +37,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void goOptions(View view) {
         // Kabloey
+        Intent intent = new Intent(MainActivity.this, OptionsActivity.class);
+        MainActivity.this.startActivity(intent);
     }
 }
