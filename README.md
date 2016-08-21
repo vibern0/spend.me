@@ -13,3 +13,6 @@ When the client manage a category or a spend, the file containing the data, will
 
 ###Use the app
 This app is not available on google play store. If you want to use, download the project and build it.
+
+###Where the data goes?
+Nowadays, it's good if we can have everything in the cloud. So, thinking about it, this app uses datastores from several cloud services to save the data.
