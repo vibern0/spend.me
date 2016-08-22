@@ -9,20 +9,25 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class CategoriesActivity extends AppCompatActivity {
+
+    private SpendsDatabaseHelper database;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_categories);
 
-
-        String[] categoryArray = { };
+        database = new SpendsDatabaseHelper(this);
+        List<String> categoryArray = database.getAllCategories();
 
         ListView lv = (ListView) findViewById(R.id.lv_categories);
         TextView tv = (TextView) findViewById(R.id.tv_no_categories);
 
-        if(categoryArray.length == 0) {
+        if(categoryArray.isEmpty()) {
             lv.setVisibility(View.GONE);
             tv.setVisibility(View.VISIBLE);
         }
