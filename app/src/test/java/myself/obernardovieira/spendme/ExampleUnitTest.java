@@ -1,4 +1,4 @@
-package com.obernardovieira.spendme;
+package myself.obernardovieira.spendme;
 
 import org.junit.Test;
 

@@ -1,13 +1,13 @@
-package com.obernardovieira.spendme;
+package myself.obernardovieira.spendme;
 
 import android.app.Activity;
 import android.os.Bundle;
 
-public class MainActivity extends Activity {
+public class SpendActivity extends Activity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_spend);
     }
 }
