@@ -4,10 +4,99 @@
     android:id="@+id/activity_category"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="myself.obernardovieira.spendme.CategoryActivity">
 
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_height="match_parent"
+        android:layout_width="300dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true">
+
+        <TextView
+            android:text="Category Name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/tv_category_name"
+            android:gravity="center"
+            android:layout_margin="10dp"
+            android:fontFamily="casual"
+            android:textSize="18sp" />
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textPersonName"
+            android:ems="10"
+            android:id="@+id/et_category_name"
+            android:gravity="center" />
+
+        <TextView
+            android:text="Category Character"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/tv_category_character"
+            android:gravity="center"
+            android:layout_margin="10dp"
+            android:fontFamily="casual"
+            android:textSize="18sp" />
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textPersonName"
+            android:ems="10"
+            android:id="@+id/et_category_character"
+            android:gravity="center" />
+
+        <TextView
+            android:text="Category Color"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/tv_category_color"
+            android:gravity="center"
+            android:layout_margin="10dp"
+            android:fontFamily="casual"
+            android:textSize="18sp"/>
+
+        <FrameLayout
+            android:id="@+id/frame_category_color"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@android:color/holo_green_dark">
+
+        </FrameLayout>
+
+        <TextView
+            android:text="Spend Preview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/tv_spend_preview"
+            android:gravity="center"
+            android:layout_margin="10dp"
+            android:fontFamily="casual"
+            android:textSize="18sp"/>
+
+        <LinearLayout
+            android:id="@+id/preview_layout"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"></LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1">
+            <Button
+                android:text="Add"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/button_add"
+                android:layout_gravity="center_vertical" />
+        </LinearLayout>
+
+    </LinearLayout>
 </RelativeLayout>

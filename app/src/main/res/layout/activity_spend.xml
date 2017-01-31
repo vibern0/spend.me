@@ -4,10 +4,73 @@
     android:id="@+id/activity_spend"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="myself.obernardovieira.spendme.SpendActivity">
 
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_height="match_parent"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_width="300dp"
+        android:gravity="center_vertical">
+
+        <TextView
+            android:text="Value"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/tv_spend_value"
+            android:gravity="center"
+            android:layout_margin="10dp"
+            android:fontFamily="casual"
+            android:textSize="18sp"/>
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="numberSigned"
+            android:ems="10"
+            android:id="@+id/et_spend_value"
+            android:gravity="center" />
+
+        <TextView
+            android:text="Category"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/tv_spend_category"
+            android:gravity="center"
+            android:layout_margin="10dp"
+            android:fontFamily="casual"
+            android:textSize="18sp"/>
+
+        <Spinner
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/spinner_spend_category"
+            android:gravity="center"
+            android:layout_gravity="center" />
+
+        <TextView
+            android:text="Description (optional)"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/tv_spend_description"
+            android:gravity="center"
+            android:layout_margin="10dp"
+            android:fontFamily="casual"
+            android:textSize="18sp"/>
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textMultiLine"
+            android:ems="10"
+            android:id="@+id/et_spend_description"
+            android:gravity="center" />
+
+        <Button
+            android:text="Add"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/button_add"/>
+    </LinearLayout>
 </RelativeLayout>
