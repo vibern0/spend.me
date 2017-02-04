@@ -64,6 +64,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
+            android:onClick="onClickFrameColor"
             android:background="@android:color/holo_green_dark">
 
         </FrameLayout>
@@ -80,10 +81,48 @@
 
         <LinearLayout
             android:id="@+id/preview_layout"
-            android:orientation="vertical"
+            android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_weight="1"></LinearLayout>
+            android:layout_weight="1"
+            android:gravity="center_vertical">
+
+            <FrameLayout android:layout_width="50sp"
+                android:layout_height="50sp">
+
+                <TextView
+                    android:text="C"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:id="@+id/tv_spend_category_char"
+                    android:gravity="center"
+                    android:textSize="35sp"
+                    android:textColor="@android:color/white"
+                    android:background="@android:color/holo_green_dark" />
+            </FrameLayout>
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="50sp"
+                android:gravity="center_vertical"
+                android:layout_marginLeft="20sp">
+
+                <TextView
+                    android:text="37,42€"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/tv_spend_value"
+                    android:textSize="23sp" />
+
+                <TextView
+                    android:text="I was distracted !"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/tv_spend_description" />
+            </LinearLayout>
+
+        </LinearLayout>
 
         <LinearLayout
             android:orientation="horizontal"
