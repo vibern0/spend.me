@@ -1,9 +1,5 @@
 package myself.obernardovieira.spendme.Core.DataObjects;
 
-/**
- * Created by bernardovieira on 02-02-2017.
- */
-
 public class Category
 {
     private int color;

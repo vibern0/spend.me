@@ -15,7 +15,7 @@ public class CategoryDataTable {
 
     private static SpendMeDBHelper mDbHelper;
 
-    public CategoryDataTable(Context context)
+    public static void init(Context context)
     {
         mDbHelper = new SpendMeDBHelper(context);
     }
@@ -110,7 +110,7 @@ public class CategoryDataTable {
         return (newRowId != -1);
     }
 
-    public boolean remove(int id)
+    public static boolean remove(int id)
     {
         SQLiteDatabase db = mDbHelper.getReadableDatabase();
         int _deleted;

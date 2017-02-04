@@ -5,6 +5,7 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Handler;
@@ -16,23 +17,31 @@ import android.widget.LinearLayout;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
+import myself.obernardovieira.spendme.Core.SpendMeApp;
+import myself.obernardovieira.spendme.Database.CategoryDataTable;
+
 public class CategoryActivity extends Activity {
 
-    FrameLayout frame_color;
+    private FrameLayout frame_color;
     //
-    SeekBar seekRed;
-    SeekBar seekGreen;
-    SeekBar seekBlue;
+    private SeekBar seekRed;
+    private SeekBar seekGreen;
+    private SeekBar seekBlue;
     //
-    TextView spendCategoryChar;
+    private TextView spendCategoryChar;
+    private TextView spendCategoryName;
     //
-    Handler handler;
+    private SpendMeApp application;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_category);
+        application = (SpendMeApp) getApplication();
+        //
+        spendCategoryChar = (TextView) findViewById(R.id.tv_spend_category_char);
+        spendCategoryName = (TextView) findViewById(R.id.tv_category_name);
     }
 
     public void onClickFrameColor(View view)
@@ -47,10 +56,6 @@ public class CategoryActivity extends Activity {
         seekRed = (SeekBar) dialog.findViewById(R.id.sb_red);
         seekGreen = (SeekBar) dialog.findViewById(R.id.sb_green);
         seekBlue = (SeekBar) dialog.findViewById(R.id.sb_blue);
-        //
-        spendCategoryChar = (TextView) findViewById(R.id.tv_spend_category_char);
-        //
-        handler = new Handler();
         //
         Button dialogButtonOk = (Button) dialog.findViewById(R.id.button_ok);
         dialogButtonOk.setOnClickListener(new View.OnClickListener()
@@ -91,20 +96,13 @@ public class CategoryActivity extends Activity {
         @Override
         public void onProgressChanged(SeekBar seekBar, int i, boolean b)
         {
-            handler.post(new Runnable()
-            {
-                @Override
-                public void run()
-                {
-                    frame_color.setBackgroundColor(
-                            Color.argb(255,
-                                    seekRed.getProgress(),
-                                    seekGreen.getProgress(),
-                                    seekBlue.getProgress()
-                            )
-                    );
-                }
-            });
+            frame_color.setBackgroundColor(
+                Color.argb(255,
+                        seekRed.getProgress(),
+                        seekGreen.getProgress(),
+                        seekBlue.getProgress()
+                )
+            );
         }
 
         @Override
@@ -113,4 +111,16 @@ public class CategoryActivity extends Activity {
         @Override
         public void onStopTrackingTouch(SeekBar seekBar) { }
     };
+
+    public void onEditOrCreateCategory(View view)
+    {
+        FrameLayout frameColor = (FrameLayout) findViewById(R.id.frame_category_color);
+        int background_color = ((ColorDrawable)frameColor.getBackground()).getColor();
+
+        CategoryDataTable.add(background_color,
+                spendCategoryName.getText().toString(),
+                spendCategoryChar.getText().toString());
+        application.updateCategoriesList = true;
+        finish();
+    }
 }

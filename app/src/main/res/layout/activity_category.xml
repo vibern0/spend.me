@@ -134,7 +134,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/button_add"
-                android:layout_gravity="center_vertical" />
+                android:layout_gravity="center_vertical"
+                android:onClick="onEditOrCreateCategory" />
         </LinearLayout>
 
     </LinearLayout>

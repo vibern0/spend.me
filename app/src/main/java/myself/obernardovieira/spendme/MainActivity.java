@@ -8,6 +8,8 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 
+import myself.obernardovieira.spendme.Database.CategoryDataTable;
+
 public class MainActivity extends Activity {
 
     @Override
@@ -21,6 +23,7 @@ public class MainActivity extends Activity {
     protected void onResume()
     {
         super.onResume();
+        CategoryDataTable.init(this);
         reloadSpends();
     }
 
@@ -37,7 +40,7 @@ public class MainActivity extends Activity {
     {
         if(item.getItemId() == R.id.item_categories)
         {
-            Intent intent = new Intent(this, CatergoriesActivity.class);
+            Intent intent = new Intent(this, CategoriesActivity.class);
             startActivity(intent);
             return true;
         }
