@@ -12,6 +12,7 @@ import android.os.Handler;
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.SeekBar;
@@ -118,8 +119,8 @@ public class CategoryActivity extends Activity {
         int background_color = ((ColorDrawable)frameColor.getBackground()).getColor();
 
         CategoryDataTable.add(background_color,
-                spendCategoryName.getText().toString(),
-                spendCategoryChar.getText().toString());
+                ((EditText) findViewById(R.id.et_category_name)).getText().toString(),
+                ((EditText) findViewById(R.id.et_category_character)).getText().toString());
         application.updateCategoriesList = true;
         finish();
     }

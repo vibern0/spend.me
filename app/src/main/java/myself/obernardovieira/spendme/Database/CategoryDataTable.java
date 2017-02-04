@@ -4,6 +4,7 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -57,9 +58,9 @@ public class CategoryDataTable {
         return new Category(color, name, character);
     }
 
-    public static List<Category> getAll()
+    public static ArrayList<Category> getAll()
     {
-        List<Category> categories = new ArrayList<>();
+        ArrayList<Category> categories = new ArrayList<>();
         SQLiteDatabase db = mDbHelper.getReadableDatabase();
 
         String[] projection = {
@@ -92,6 +93,8 @@ public class CategoryDataTable {
             );
 
             categories.add(new Category(color, name, character));
+
+            Log.d("aefsrgdt", "rg " + color + " " + name + " " + character);
         } while(c.moveToNext());
 
         return categories;
