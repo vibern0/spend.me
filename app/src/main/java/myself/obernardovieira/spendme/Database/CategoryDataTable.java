@@ -4,11 +4,7 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.util.Log;
-
 import java.util.ArrayList;
-import java.util.List;
-
 import myself.obernardovieira.spendme.Core.DataObjects.Category;
 import myself.obernardovieira.spendme.Database.SpendMeContract.*;
 
@@ -58,6 +54,35 @@ public class CategoryDataTable {
         return new Category(color, name, character);
     }
 
+    public static int get(String name)
+    {
+        SQLiteDatabase db = mDbHelper.getReadableDatabase();
+
+        String[] projection = {
+                CategoriesTable._ID
+        };
+
+        String selection = CategoriesTable.COLUMN_NAME + " = ?";
+        String[] selectionArgs = { name };
+
+        Cursor c = db.query(
+                CategoriesTable.TABLE_NAME,
+                projection,
+                selection,
+                selectionArgs,
+                null,
+                null,
+                null
+        );
+
+        c.moveToFirst();
+        int id = c.getInt(
+                c.getColumnIndexOrThrow(CategoriesTable._ID)
+        );
+
+        return id;
+    }
+
     public static ArrayList<Category> getAll()
     {
         ArrayList<Category> categories = new ArrayList<>();
@@ -79,7 +104,11 @@ public class CategoryDataTable {
                 null
         );
 
-        c.moveToFirst();
+        if(!c.moveToFirst())
+        {
+            return null;
+        }
+
         do
         {
             int color = c.getInt(
@@ -94,7 +123,6 @@ public class CategoryDataTable {
 
             categories.add(new Category(color, name, character));
 
-            Log.d("aefsrgdt", "rg " + color + " " + name + " " + character);
         } while(c.moveToNext());
 
         return categories;

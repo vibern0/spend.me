@@ -30,7 +30,6 @@ public class CategoryActivity extends Activity {
     private SeekBar seekBlue;
     //
     private TextView spendCategoryChar;
-    private TextView spendCategoryName;
     //
     private SpendMeApp application;
 
@@ -42,7 +41,6 @@ public class CategoryActivity extends Activity {
         application = (SpendMeApp) getApplication();
         //
         spendCategoryChar = (TextView) findViewById(R.id.tv_spend_category_char);
-        spendCategoryName = (TextView) findViewById(R.id.tv_category_name);
     }
 
     public void onClickFrameColor(View view)

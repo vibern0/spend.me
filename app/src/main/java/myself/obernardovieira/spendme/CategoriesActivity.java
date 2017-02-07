@@ -6,9 +6,11 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -30,9 +32,15 @@ public class CategoriesActivity extends Activity {
         ListView lv = (ListView) findViewById(R.id.lv_categories);
         application = (SpendMeApp)getApplication();
         categories = CategoryDataTable.getAll();
+        if(categories == null)
+        {
+            categories = new ArrayList<>();
+        }
         adapter = new MyCategoriesAdapter();
         lv.setAdapter(adapter);
-        updateCategoriesList();
+        lv.setOnItemClickListener(adapterItemListener);
+        lv.setOnItemLongClickListener(adapterItemLongListener);
+        adapter.notifyDataSetChanged();
     }
 
     @Override
@@ -43,13 +51,8 @@ public class CategoriesActivity extends Activity {
         {
             application.updateCategoriesList = false;
             categories = CategoryDataTable.getAll();
-            updateCategoriesList();
+            adapter.notifyDataSetChanged();
         }
-    }
-
-    private void updateCategoriesList()
-    {
-        adapter.notifyDataSetChanged();
     }
 
     public void onClickButtonAddCategory(View view)
@@ -91,4 +94,22 @@ public class CategoriesActivity extends Activity {
             return layout;
         }
     }
+
+    AdapterView.OnItemClickListener adapterItemListener = new AdapterView.OnItemClickListener()
+    {
+        @Override
+        public void onItemClick(AdapterView<?> adapterView, View view, int i, long l)
+        {
+            //edit category
+        }
+    };
+    AdapterView.OnItemLongClickListener adapterItemLongListener = new AdapterView.OnItemLongClickListener()
+    {
+        @Override
+        public boolean onItemLongClick(AdapterView<?> adapterView, View view, int i, long l)
+        {
+            //ask to delete
+            return false;
+        }
+    };
 }
