@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -14,6 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import myself.obernardovieira.spendme.Core.DataObjects.Category;
+import myself.obernardovieira.spendme.Core.DataObjects.Spend;
 import myself.obernardovieira.spendme.Core.SpendMeApp;
 import myself.obernardovieira.spendme.Database.CategoryDataTable;
 import myself.obernardovieira.spendme.Database.SpendDataTable;
@@ -29,14 +31,39 @@ public class SpendActivity extends Activity {
         setContentView(R.layout.activity_spend);
 
         application = (SpendMeApp) getApplication();
-        ArrayList<Category> categories = CategoryDataTable.getAll();
-        if(categories == null)
+        if(savedInstanceState == null)
         {
-            Toast.makeText(this, "There is no categories!", Toast.LENGTH_LONG).show();
-        }
-        else
-        {
-            loadSpinner(categories);
+            Bundle extras = getIntent().getExtras();
+            if(extras == null)
+            {
+                ArrayList<Category> categories = CategoryDataTable.getAll();
+                if(categories == null)
+                {
+                    Toast.makeText(this, "There is no categories!", Toast.LENGTH_LONG).show();
+                }
+                else
+                {
+                    loadSpinner(categories);
+                }
+                getIntent().removeExtra("spend");
+            }
+            else
+            {
+                int spend_id = extras.getInt("spend");
+                Spend spend = SpendDataTable.get(spend_id);
+                String description;
+                //
+                ((TextView)findViewById(R.id.et_spend_value)).
+                        setText(String.valueOf(spend.getValue()));
+                ((Spinner)findViewById(R.id.spinner_spend_category)).
+                        setSelection(CategoryDataTable.get(spend.getCategory().getName()));
+                description = spend.getDescription();
+                if(description.length() > 0)
+                {
+                    ((TextView)findViewById(R.id.et_spend_description)).setText(description);
+                }
+                ((Button)findViewById(R.id.button_add)).setText("Update");
+            }
         }
     }
 
