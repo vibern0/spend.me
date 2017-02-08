@@ -5,13 +5,12 @@
     android:id="@+id/activity_catergories"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="myself.obernardovieira.spendme.CatergoriesActivity">
+    tools:context="myself.obernardovieira.spendme.CategoriesActivity">
 
-    <LinearLayout
-        android:orientation="vertical"
+    <ListView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/categories_layout"></LinearLayout>
+        android:id="@+id/lv_categories" />
 
     <Button
         android:text="+"

@@ -27,7 +27,7 @@
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="numberSigned"
+            android:inputType="numberDecimal"
             android:ems="10"
             android:id="@+id/et_spend_value"
             android:gravity="center" />
@@ -71,6 +71,7 @@
             android:text="Add"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:onClick="addSpend"
             android:id="@+id/button_add"/>
     </LinearLayout>
 </RelativeLayout>

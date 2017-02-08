@@ -3,6 +3,7 @@
     package="myself.obernardovieira.spendme">
 
     <application
+        android:name="myself.obernardovieira.spendme.Core.SpendMeApp"
         android:allowBackup="true"
         android:icon="@drawable/dollarsign"
         android:label="@string/app_name"
@@ -15,7 +16,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".CatergoriesActivity" />
+        <activity android:name=".CategoriesActivity" />
         <activity android:name=".CategoryActivity" />
         <activity android:name=".SpendActivity"></activity>
     </application>
