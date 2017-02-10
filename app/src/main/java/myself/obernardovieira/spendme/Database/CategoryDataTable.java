@@ -51,6 +51,7 @@ public class CategoryDataTable {
                 c.getColumnIndexOrThrow(CategoriesTable.COLUMN_CHARACTER)
         );
 
+        db.close();
         return new Category(color, name, character);
     }
 
@@ -80,6 +81,7 @@ public class CategoryDataTable {
                 c.getColumnIndexOrThrow(CategoriesTable._ID)
         );
 
+        db.close();
         return id;
     }
 
@@ -106,6 +108,7 @@ public class CategoryDataTable {
 
         if(!c.moveToFirst())
         {
+            db.close();
             return null;
         }
 
@@ -125,6 +128,7 @@ public class CategoryDataTable {
 
         } while(c.moveToNext());
 
+        db.close();
         return categories;
     }
 
@@ -138,7 +142,24 @@ public class CategoryDataTable {
         values.put(CategoriesTable.COLUMN_CHARACTER, character);
         long newRowId = db.insert(CategoriesTable.TABLE_NAME, null, values);
 
+        db.close();
         return (newRowId != -1);
+    }
+
+    public static long update(int rowId, int color, String name, String character)
+    {
+        SQLiteDatabase db = mDbHelper.getWritableDatabase();
+
+        ContentValues values = new ContentValues();
+        values.put(CategoriesTable.COLUMN_COLOR, color);
+        values.put(CategoriesTable.COLUMN_NAME, name);
+        values.put(CategoriesTable.COLUMN_CHARACTER, character);
+        String selection = CategoriesTable._ID + " = ?";
+        String[] selectionArgs = { String.valueOf(rowId) };
+
+        long id = db.update(CategoriesTable.TABLE_NAME, values, selection, selectionArgs);
+        db.close();
+        return id;
     }
 
     public static boolean remove(int id)
@@ -150,6 +171,7 @@ public class CategoryDataTable {
         String[] selectionArgs = { Integer.toString(id) };
         _deleted = db.delete(CategoriesTable.TABLE_NAME, selection, selectionArgs);
 
+        db.close();
         return (_deleted != 0);
     }
 }

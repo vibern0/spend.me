@@ -125,6 +125,23 @@ public class SpendDataTable {
         return (newRowId != -1);
     }
 
+    public static long update(int rowId, float value, String category_name, String description)
+    {
+        SQLiteDatabase db = mDbHelper.getWritableDatabase();
+
+        ContentValues values = new ContentValues();
+        values.put(SpendsTable.COLUMN_VALUE, value);
+        values.put(SpendsTable.COLUMN_CATEGORY, CategoryDataTable.get(category_name));
+        values.put(SpendsTable.COLUMN_DESCRIPTION, description);
+        String selection = CategoriesTable._ID + " = ?";
+        String[] selectionArgs = { String.valueOf(rowId) };
+
+        long id = db.update(SpendsTable.TABLE_NAME, values, selection, selectionArgs);
+        db.close();
+        return id;
+    }
+
+
     public static boolean remove(int id)
     {
         SQLiteDatabase db = mDbHelper.getReadableDatabase();

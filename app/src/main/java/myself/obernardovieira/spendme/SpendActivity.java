@@ -2,6 +2,7 @@ package myself.obernardovieira.spendme;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -23,6 +24,7 @@ import myself.obernardovieira.spendme.Database.SpendDataTable;
 public class SpendActivity extends Activity {
 
     private SpendMeApp application;
+    private int editing_id;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -34,29 +36,33 @@ public class SpendActivity extends Activity {
         if(savedInstanceState == null)
         {
             Bundle extras = getIntent().getExtras();
-            if(extras == null)
+            //
+            ArrayList<Category> categories = CategoryDataTable.getAll();
+            if(categories == null)
             {
-                ArrayList<Category> categories = CategoryDataTable.getAll();
-                if(categories == null)
-                {
-                    Toast.makeText(this, "There is no categories!", Toast.LENGTH_LONG).show();
-                }
-                else
-                {
-                    loadSpinner(categories);
-                }
-                getIntent().removeExtra("spend");
+                Toast.makeText(this, "There is no categories!", Toast.LENGTH_LONG).show();
             }
             else
             {
-                int spend_id = extras.getInt("spend");
-                Spend spend = SpendDataTable.get(spend_id);
+                loadSpinner(categories);
+            }
+            //
+            if(extras == null)
+            {
+                getIntent().removeExtra("spend");
+                editing_id = -1;
+            }
+            else
+            {
+                editing_id = extras.getInt("spend");
+
+                Spend spend = SpendDataTable.get(editing_id);
                 String description;
                 //
                 ((TextView)findViewById(R.id.et_spend_value)).
                         setText(String.valueOf(spend.getValue()));
                 ((Spinner)findViewById(R.id.spinner_spend_category)).
-                        setSelection(CategoryDataTable.get(spend.getCategory().getName()));
+                        setSelection(CategoryDataTable.get(spend.getCategory().getName()) - 1);
                 description = spend.getDescription();
                 if(description.length() > 0)
                 {
@@ -115,11 +121,22 @@ public class SpendActivity extends Activity {
         Spinner spinner = (Spinner) findViewById(R.id.spinner_spend_category);
         EditText description = (EditText) findViewById(R.id.et_spend_description);
 
-        SpendDataTable.add(
-                Float.parseFloat(value.getText().toString()),
-                spinner.getSelectedItem().toString(),
-                description.getText().toString()
-        );
+        if(editing_id == -1)
+        {
+            SpendDataTable.add(
+                    Float.parseFloat(value.getText().toString()),
+                    spinner.getSelectedItem().toString(),
+                    description.getText().toString()
+            );
+        }
+        else
+        {
+            SpendDataTable.update(editing_id,
+                    Float.parseFloat(value.getText().toString()),
+                    spinner.getSelectedItem().toString(),
+                    description.getText().toString()
+            );
+        }
         application.updateSpendsList = true;
         finish();
         //
