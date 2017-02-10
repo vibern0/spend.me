@@ -67,6 +67,7 @@ public class SpendDataTable {
         SQLiteDatabase db = mDbHelper.getReadableDatabase();
 
         String[] projection = {
+                SpendsTable._ID,
                 SpendsTable.COLUMN_VALUE,
                 SpendsTable.COLUMN_CATEGORY,
                 SpendsTable.COLUMN_DESCRIPTION
@@ -89,6 +90,9 @@ public class SpendDataTable {
 
         do
         {
+            int mid = c.getInt(
+                    c.getColumnIndexOrThrow(SpendsTable._ID)
+            );
             float value = c.getFloat(
                     c.getColumnIndexOrThrow(SpendsTable.COLUMN_VALUE)
             );
@@ -98,6 +102,8 @@ public class SpendDataTable {
             String description = c.getString(
                     c.getColumnIndexOrThrow(SpendsTable.COLUMN_DESCRIPTION)
             );
+
+            Log.d("spendsss", "> " + mid + " " + value + " " + id_category + " " + description);
 
             spends.add(new Spend(value, CategoryDataTable.get(id_category), description));
 
@@ -119,8 +125,32 @@ public class SpendDataTable {
         return (newRowId != -1);
     }
 
-    public static void remove(int id)
+    public static long update(int rowId, float value, String category_name, String description)
     {
-        //
+        SQLiteDatabase db = mDbHelper.getWritableDatabase();
+
+        ContentValues values = new ContentValues();
+        values.put(SpendsTable.COLUMN_VALUE, value);
+        values.put(SpendsTable.COLUMN_CATEGORY, CategoryDataTable.get(category_name));
+        values.put(SpendsTable.COLUMN_DESCRIPTION, description);
+        String selection = CategoriesTable._ID + " = ?";
+        String[] selectionArgs = { String.valueOf(rowId) };
+
+        long id = db.update(SpendsTable.TABLE_NAME, values, selection, selectionArgs);
+        db.close();
+        return id;
+    }
+
+
+    public static boolean remove(int id)
+    {
+        SQLiteDatabase db = mDbHelper.getReadableDatabase();
+        int _deleted;
+
+        String selection = SpendsTable._ID + " = ?";
+        String[] selectionArgs = { Integer.toString(id) };
+        _deleted = db.delete(SpendsTable.TABLE_NAME, selection, selectionArgs);
+
+        return (_deleted != 0);
     }
 }

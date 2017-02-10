@@ -9,6 +9,7 @@ import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;
@@ -18,6 +19,7 @@ import android.widget.LinearLayout;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
+import myself.obernardovieira.spendme.Core.DataObjects.Category;
 import myself.obernardovieira.spendme.Core.SpendMeApp;
 import myself.obernardovieira.spendme.Database.CategoryDataTable;
 
@@ -32,6 +34,7 @@ public class CategoryActivity extends Activity {
     private TextView spendCategoryChar;
     //
     private SpendMeApp application;
+    private int editing_id;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -41,6 +44,25 @@ public class CategoryActivity extends Activity {
         application = (SpendMeApp) getApplication();
         //
         spendCategoryChar = (TextView) findViewById(R.id.tv_spend_category_char);
+        //
+        Bundle extras = getIntent().getExtras();
+        if(extras == null)
+        {
+            getIntent().removeExtra("category");
+            editing_id = -1;
+        }
+        else
+        {
+            editing_id = extras.getInt("category");
+
+            Category category = CategoryDataTable.get(editing_id);
+            //
+            ((EditText)findViewById(R.id.et_category_name)).setText(category.getName());
+            ((EditText)findViewById(R.id.et_category_character)).setText(category.getCharacter());
+            ((FrameLayout)findViewById(R.id.frame_category_color)).setBackgroundColor(category.getColor());
+            ((TextView)findViewById(R.id.tv_spend_category_char)).setBackgroundColor(category.getColor());
+            ((Button)findViewById(R.id.button_add)).setText("Update");
+        }
     }
 
     public void onClickFrameColor(View view)
@@ -116,9 +138,19 @@ public class CategoryActivity extends Activity {
         FrameLayout frameColor = (FrameLayout) findViewById(R.id.frame_category_color);
         int background_color = ((ColorDrawable)frameColor.getBackground()).getColor();
 
-        CategoryDataTable.add(background_color,
-                ((EditText) findViewById(R.id.et_category_name)).getText().toString(),
-                ((EditText) findViewById(R.id.et_category_character)).getText().toString());
+        if(editing_id == -1)
+        {
+            CategoryDataTable.add(background_color,
+                    ((EditText) findViewById(R.id.et_category_name)).getText().toString(),
+                    ((EditText) findViewById(R.id.et_category_character)).getText().toString());
+        }
+        else
+        {
+            CategoryDataTable.update(editing_id, background_color,
+                    ((EditText) findViewById(R.id.et_category_name)).getText().toString(),
+                    ((EditText) findViewById(R.id.et_category_character)).getText().toString());
+            application.updateSpendsList = true;
+        }
         application.updateCategoriesList = true;
         finish();
     }

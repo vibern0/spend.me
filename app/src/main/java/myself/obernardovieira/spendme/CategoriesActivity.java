@@ -1,6 +1,8 @@
 package myself.obernardovieira.spendme;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -17,6 +19,7 @@ import java.util.ArrayList;
 import myself.obernardovieira.spendme.Core.DataObjects.Category;
 import myself.obernardovieira.spendme.Core.SpendMeApp;
 import myself.obernardovieira.spendme.Database.CategoryDataTable;
+import myself.obernardovieira.spendme.Database.SpendMeContract;
 
 public class CategoriesActivity extends Activity {
 
@@ -100,7 +103,9 @@ public class CategoriesActivity extends Activity {
         @Override
         public void onItemClick(AdapterView<?> adapterView, View view, int i, long l)
         {
-            //edit category
+            Intent intent = new Intent(CategoriesActivity.this, CategoryActivity.class);
+            intent.putExtra("category", i + 1);
+            startActivity(intent);
         }
     };
     AdapterView.OnItemLongClickListener adapterItemLongListener = new AdapterView.OnItemLongClickListener()
@@ -108,8 +113,31 @@ public class CategoriesActivity extends Activity {
         @Override
         public boolean onItemLongClick(AdapterView<?> adapterView, View view, int i, long l)
         {
-            //ask to delete
-            return false;
+            final int clicked_id = i + 1;
+            //
+            AlertDialog.Builder builder = new AlertDialog.Builder(CategoriesActivity.this);
+            builder.setTitle("Delete Category");
+            builder.setMessage("Do you want to delete this category?");
+            builder.setPositiveButton("Delete", new DialogInterface.OnClickListener()
+            {
+                public void onClick(DialogInterface dialog, int id)
+                {
+                    CategoryDataTable.remove(clicked_id);
+                    dialog.dismiss();
+                    adapter.notifyDataSetChanged();
+                    Toast.makeText(CategoriesActivity.this, "Deleted!", Toast.LENGTH_SHORT).show();
+                }
+            });
+            builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener()
+            {
+                public void onClick(DialogInterface dialog, int id)
+                {
+                    dialog.dismiss();
+                }
+            });
+            AlertDialog alertDialog = builder.create();
+            alertDialog.show();
+            return true;
         }
     };
 }

@@ -1,6 +1,8 @@
 package myself.obernardovieira.spendme;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -9,9 +11,11 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -45,6 +49,8 @@ public class MainActivity extends Activity {
         }
         adapter = new MySpendsAdapter();
         lv.setAdapter(adapter);
+        lv.setOnItemClickListener(adapterItemListener);
+        lv.setOnItemLongClickListener(adapterItemLongListener);
         adapter.notifyDataSetChanged();
     }
 
@@ -130,4 +136,48 @@ public class MainActivity extends Activity {
             return layout;
         }
     }
+
+    AdapterView.OnItemClickListener adapterItemListener = new AdapterView.OnItemClickListener()
+    {
+        @Override
+        public void onItemClick(AdapterView<?> adapterView, View view, int i, long l)
+        {
+            Intent intent = new Intent(MainActivity.this, SpendActivity.class);
+            intent.putExtra("spend", i + 1);
+            startActivity(intent);
+        }
+    };
+
+    AdapterView.OnItemLongClickListener adapterItemLongListener = new AdapterView.OnItemLongClickListener()
+    {
+        @Override
+        public boolean onItemLongClick(AdapterView<?> adapterView, View view, int i, long l)
+        {
+            final int clicked_id = i + 1;
+            //
+            AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+            builder.setTitle("Delete Spend");
+            builder.setMessage("Do you want to delete this spend?");
+            builder.setPositiveButton("Delete", new DialogInterface.OnClickListener()
+            {
+                public void onClick(DialogInterface dialog, int id)
+                {
+                    SpendDataTable.remove(clicked_id);
+                    dialog.dismiss();
+                    adapter.notifyDataSetChanged();
+                    Toast.makeText(MainActivity.this, "Deleted!", Toast.LENGTH_SHORT).show();
+                }
+            });
+            builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener()
+            {
+                public void onClick(DialogInterface dialog, int id)
+                {
+                    dialog.dismiss();
+                }
+            });
+            AlertDialog alertDialog = builder.create();
+            alertDialog.show();
+            return true;
+        }
+    };
 }
